@@ -5,11 +5,10 @@ const mongoConnect = require('./db');
 mongoConnect();
 
 const port = 3000;
+app.use(express.json())
 
-app.use('/', (req, res) =>{
-    res.send("Well Done...");
-});
-
+app.use('/api/auth', require('./routes/auth')); 
+app.use('/api/notes', require('./routes/notes')); 
 
 app.listen(3000, ()=>{
     console.log(`Listenig at http://localhost:${port}`);
