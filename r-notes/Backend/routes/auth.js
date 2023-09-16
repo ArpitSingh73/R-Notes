@@ -1,10 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const User = require("../models/Users");
+
+const jwt = require("jsonwebtoken");
+
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-
+const secret = "qwertyuiop";
 
 router.post(
   "/createuser",
@@ -32,8 +35,8 @@ router.post(
       user = await User.create({
         name: req.body.name,
         email: req.body.email,
-        password: passwrd
-      })
+        password: passwrd,
+      });
 
       const data = {
         user: { id: user.id },
@@ -47,6 +50,5 @@ router.post(
     }
   }
 );
-
 
 module.exports = router;
