@@ -8,10 +8,8 @@ const jwt = require("jsonwebtoken");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const secret = "qwertyuiop";
- const fetchUser = require('../middleware/fetchUser')
+const fetchUser = require("../middleware/fetchUser");
 
-
- 
 // route for signup --->
 router.post(
   "/createuser",
