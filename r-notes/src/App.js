@@ -1,28 +1,25 @@
-import './App.css';
-import About from './Components/About';
-import Home from './Components/Home';
-import Navbar from './Components/Navbar';
-
-import {BrowserRouter as Router, Routes , Route} from "react-router-dom";
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import Home from "./Components/Home";
+import About from "./Components/About";
+import Alert from "./Components/Alert";
+import NoteState from "./Context/NoteState";
 function App() {
   return (
-   <>
-<Router>
+    <>
+      <NoteState>
+        <Router>
+          <Navbar />
+          <Alert message="Welcome to react" />
 
-<Navbar></Navbar>
+          <Routes>
+            <Route exact path="/" element={<Home />}></Route>
 
-
-    <Routes>
-{/*           <Route exact path="/business" element={<News setProgress={setProgress} apiKey={apiKey} key="business" pageSize={pageSize} country="in" category="business"/>}></Route> 
- */}
-
- <Route exact path='/about' element={<About></About>} ></Route>
- <Route exact path='/home' element={<Home></Home>} ></Route>
-  
-   
-    </Routes>
-
-</Router>
+            <Route exact path="/about" element={<About />}></Route>
+          </Routes>
+        </Router>
+      </NoteState>
     </>
   );
 }
