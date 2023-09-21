@@ -9,6 +9,8 @@ const AddNote = () => {
   const handleClick = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
+
+    setNote({title: "", description: "", tag: ""})
   };
 
   const onchange = (e) => {
@@ -65,13 +67,8 @@ const AddNote = () => {
             />
           </div>
         
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={handleClick}
-          >
-            Submit
-          </button>
+          <button disabled={note.title.length<5 || note.description.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>Add Note</button>
+
         </form>
       </div>
     </>
