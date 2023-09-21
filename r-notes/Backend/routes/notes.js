@@ -6,7 +6,7 @@ const Note = require("../models/Notes");
 
 router.get("/fetchnotes", fetchUser, async (req, res) => {
   try {
-    const notes = await Notes.find({ user: req.user.id });
+    const notes = await Note.find({ user: req.user.id });
 
     res.json(notes);
   } catch (error) {
@@ -58,7 +58,7 @@ router.put("/update/:id", fetchUser, async (req, res) => {
     if (!note) {
       res.status(404).send("Not found");
     }
-
+console.log( req.user.id)
     if (note.user.toString() !== req.user.id) {
       return req.status(401).send("Not allowed");
     }

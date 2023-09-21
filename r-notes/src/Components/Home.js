@@ -1,8 +1,8 @@
 import Notes from "./Notes";
-export default function Home() {
+export default function Home({show}) {
   return (
     <div>
-      <Notes />
+      <Notes show={show} />
     </div>
   );
 }

@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const notesSchema = new Schema({
   user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Users",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   title: {
     type: String,
@@ -13,7 +13,7 @@ const notesSchema = new Schema({
   description: {
     type: String,
     required: true,
-    unique: true,
+   
   },
 
   tag: {
@@ -22,7 +22,7 @@ const notesSchema = new Schema({
   },
   date: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
 });
 

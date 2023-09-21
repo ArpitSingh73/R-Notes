@@ -1,24 +1,58 @@
-import React, { useContext, useEffect, useRef } from "react";
-import noteContext from "../Context/NoteContext.js";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import noteContext from "../Context/noteContext.js";
 import Noteitem from "./Noteitem";
 import AddNote from "./AddNote.js";
+import {  useNavigate } from 'react-router-dom';
 
-const Notes = () => {
+
+const Notes = (props) => {
   const context = useContext(noteContext);
-  const { notes, getNotes } = context;
+  const { notes, getNotes, editNote } = context;
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    getNotes()
-    // eslint-disable-next-line
-  }, []);
+    if(localStorage.getItem('token')){
+    getNotes();
+  } 
+  else{
+  navigate('/login')
+  }
+  });
 
   const ref = useRef(null);
-  const updateNote = (note) => {
+  const refClose = useRef(null);
+  const [note, setNote] = useState({
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "",
+  });
+
+  const updateNote = (currentNote) => {
     ref.current.click();
+    setNote({
+      id: currentNote._id,
+      etitle: currentNote.title,
+      edescription: currentNote.description,
+      etag: currentNote.tag,
+    });
+    props.show("notes updated", "success")
   };
+
+  const handleClick = (e) => {
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+    refClose.current.click();
+    props.show("notes updated", "success")
+  };
+
+  // const onChange = (e) => {
+  //   setNote({ ...note, [e.target.name]: e.target.value });
+  // };
+
   return (
     <>
-      <AddNote />
+      <AddNote show={props.show} />
       <div className="container">
         <button
           type="button"
@@ -59,7 +93,7 @@ const Notes = () => {
 
 
 
-              {/* <div className="container my-3">
+              <div className="container my-3">
         <form>
 
 
@@ -71,9 +105,9 @@ const Notes = () => {
             <input
               type="text"
               className="form-control"
-              id="titlr"
-              name="title"
-              aria-describedby="emailHelp"
+              id="etitle"
+              name="etitle" value={note.etitle}
+              
               onChange={onchange}
             />
           </div>
@@ -84,9 +118,9 @@ const Notes = () => {
             <input
               type="text"
               className="form-control"
-              id="description"
-              name="description"
-              aria-describedby="emailHelp"
+              id="etag"
+              name="etag" value={note.etag}
+             
               onChange={onchange}
             />
           </div>
@@ -113,21 +147,31 @@ const Notes = () => {
             Submit
           </button>
         </form>
-      </div> */}
+      </div>
+
+
 
 
 
 
               <div className="modal-footer">
                 <button
+                  ref={refClose}
                   type="button"
                   className="btn btn-secondary"
-                  data-dismiss="modal"
+                  data-bs-dismiss="modal"
                 >
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
-                  Save changes
+                <button
+                  disabled={
+                    note.etitle.length < 5 || note.edescription.length < 5
+                  }
+                  onClick={handleClick}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Update Note
                 </button>
               </div>
             </div>
@@ -138,8 +182,8 @@ const Notes = () => {
       <div className="container">
         <div className="row my-3">
           <h1>Your notes</h1>
-          {notes.map((not) => {
-            return <Noteitem note={not} updatenote={updateNote}></Noteitem>;
+          {notes.map((note) => {
+            return <Noteitem key={note._id}  note={note} updatenote={updateNote} show={props.show}></Noteitem>;
           })}
         </div>
       </div>
