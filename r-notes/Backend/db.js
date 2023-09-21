@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const URI ='mongodb://localhost:27017/Trial';
+const URI ='mongodb://localhost:27017/Trial3';
 
 
 
