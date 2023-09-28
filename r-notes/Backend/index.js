@@ -1,9 +1,11 @@
 const express = require('express');
 var app = express()
 var cors = require('cors')
+const mongoSanitize = require('express-mongo-sanitize');
 
 
 app.use(cors())
+app.use(mongoSanitize());
 
 const mongoConnect = require('./db');
 mongoConnect();
