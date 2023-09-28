@@ -29,7 +29,7 @@ const getNotes = async()=>{
   const addNote = async(title, description, tag) => {
     // setNotes(notes.concat(noteInitial));
 
-    const response = await fetch(`http://localhost:5000/api/notes/update`,{
+    const response = await fetch(`http://localhost:5000/api/notes/addnote`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const getNotes = async()=>{
   };
 
   // Edit a note
-  const editNote = async (id, title, desc, tag) => {
+  const editNote = async (id, title, description, tag) => {
 
     const response = await fetch(`http://localhost:5000/api/notes/update/${id}`, {
       method: "PUT",
@@ -69,9 +69,9 @@ const getNotes = async()=>{
         "Content-Type": "application/json",
          "auth-token" :localStorage.getItem("token")
       },
-      body: JSON.stringify({title, desc, tag}),
+      body: JSON.stringify({title, description, tag}),
     });
-      const op = await response.json();
+      // const op = await response.json();
   
 let newnotes = JSON.parse(JSON.stringify(notes));
     for (let i = 0; i < notes.length; i++) {
@@ -79,7 +79,7 @@ let newnotes = JSON.parse(JSON.stringify(notes));
       const element = newnotes[i];
       if (element._id === id) {
         newnotes[i].title = title;
-        newnotes[i].description = desc;
+        newnotes[i].description = description;
         newnotes[i].tag = tag;
         break;
       }

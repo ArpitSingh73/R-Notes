@@ -13,6 +13,7 @@ const Signup = (props) => {
   const { name, email, password } = credentials;
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const response = await fetch("http://localhost:5000/api/auth/createuser", {
       method: "POST",
       headers: {
@@ -24,12 +25,12 @@ const Signup = (props) => {
     console.log(json);
     if (json.success) {
       // Save the auth token and redirect
-      localStorage.setItem("token", JSON.stringify(json.authtoken));
-      props.show("Welcome", "success")
+      localStorage.setItem("token", json.jwtData);
+      props.show("Welcome", "success");
 
       navigate("/");
     } else {
-      props.show("Invalid credentials", "danger")
+      props.show("Invalid credentials", "danger");
     }
   };
 
@@ -38,10 +39,12 @@ const Signup = (props) => {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ width: "60%", marginTop: "200px" ,border:"solid 2px white", borderRadius:"10px" }}>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-3">
-          <label htmlFor="name">Username</label>
+          <label htmlFor="name" style={{ color: "white", marginTop:"20px" }}>
+            <b>Username</b>
+          </label>
           <input
             type="text"
             className="form-control"
@@ -51,35 +54,50 @@ const Signup = (props) => {
             required
             // value={credentials.name}
             minLength={3}
-            placeholder="Enter a username"
+            placeholder="Enter username..."
+            style={{
+              boxShadow: "3px 3px 2px ",
+              height: "55px",
+              border: "solid 3px #778899",
+              marginBottom:"30px",backgroundColor:"#d9d9d9"
+              
+            }}
           />
         </div>
 
         <div className="form-group mb-3">
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email" style={{ color: "white" }}>
+            <b>Email </b>
+          </label>
           <input
             type="email"
             className="form-control"
             id="email"
             onChange={handleChange}
-            // value={credentials.email}
             name="email"
             aria-describedby="emailHelp"
-            placeholder="Enter email"
+            placeholder="Enter email address..."
             required
+            style={{
+              boxShadow: "3px 3px 2px ",
+              height: "55px",
+              border: "solid 3px #778899",
+              marginBottom:"6px",backgroundColor:"#d9d9d9"
+            }}
           />
           <small
             id="emailHelp"
-          
-         
-            className="form-text text-muted"
+            className="form-text "
+            style={{ color: "#ffffff" }}
           >
             We'll never share your email with anyone else.
           </small>
         </div>
 
         <div className="form-group mb-3">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" style={{ color: "white" }}>
+            <b>Password</b>
+          </label>
           <input
             type="password"
             // value={credentials.password}
@@ -87,26 +105,23 @@ const Signup = (props) => {
             name="password"
             id="password"
             onChange={handleChange}
-            placeholder="Password"
+            placeholder="Enter your password..."
             minLength={5}
             required
+            style={{
+              boxShadow: "3px 3px 2px ",
+              height: "55px",
+              border: "solid 3px #778899",
+              marginBottom:"6px",backgroundColor:"#d9d9d9"
+            }}
           />
         </div>
 
-        {/* <div className="form-group mb-3">
-          <label htmlFor="cpassword">Password </label>
-          <input
-            type="password"
-            className="form-control"
-            id="cpassword"
-            name="cpassword"
-            onChange={handleChange}
-            placeholder="Confirm Password"
-            // value={credentials.password}
-          />
-        </div> */}
-
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{ boxShadow: "2px 2px 2px black ", border: "solid 1px black",  marginBottom:"30px" }}
+        >
           Submit
         </button>
       </form>

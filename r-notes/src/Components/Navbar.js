@@ -11,10 +11,11 @@ const Navbar = () => {
 
   let location = useLocation();
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <nav className="navbar navbar-expand-lg navbar-dark py-3"  style={{ position:"fixed" , width:"100%", backgroundColor:"#00264d    ", color:"#778899"}} >
       <div className="container-fluid ">
+      <div style={{ height:"35px", width:"35px", border:"2px solid white" ,borderRadius:"50%" ,marginRight:"8px"}} ></div>
         <Link className="navbar-brand" to="#">
-          Navbar
+        <b>   R-Notes  </b>  
         </Link>
         <button
           className="navbar-toggler"
@@ -37,10 +38,10 @@ const Navbar = () => {
                 aria-current="page"
                 to="/"
               >
-                Home
+                Home  
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 className={`nav-link ${
                   location.pathname === "/" ? "active" : ""
@@ -48,22 +49,22 @@ const Navbar = () => {
                 aria-current="page"
                 to="/About"
               >
-                About
+                About  
               </Link>
-            </li>
+            </li> */}
           </ul>
 
-          {!JSON.parse(localStorage.getItem("token")) ? (
+          {!(localStorage.getItem("token")) ? (
             <form className="d-flex">
-              <Link className="btn btn-primary mx-1" to="/login" role="button">
+              <Link className="btn btn-primary mx-2" to="/login" role="button" style={{boxShadow :"2px 2px 2px black ",  border:"solid 1px black" }} >
                 Login
               </Link>
-              <Link className="btn btn-primary mx-1" to="/signup" role="button">
+              <Link className="btn btn-primary mx-1" to="/signup" role="button"   style={{boxShadow :"2px 2px 2px black ",  border:"solid 1px black" }}>
                 Signup
               </Link>
             </form>
           ) : (
-            <button className="btn btn-primary" onClick={handleClick}>
+            <button className="btn btn-primary" onClick={handleClick} style={{boxShadow :"2px 2px 2px black ",  border:"solid 1px black" }} >
               Loguot
             </button>
           )}

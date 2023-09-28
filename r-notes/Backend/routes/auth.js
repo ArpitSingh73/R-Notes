@@ -30,7 +30,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({success,  error: "User already exists with this email" });
+          .json({ success, error: "User already exists with this email" });
       }
       const salt = await bcrypt.genSalt(10);
       const passwrd = await bcrypt.hash(req.body.password, salt);
@@ -45,8 +45,8 @@ router.post(
         user: { id: user.id },
       };
       const jwtData = jwt.sign(data, secret);
-      success= true;
-      res.json({success, jwtData });
+      success = true;
+      res.json({ success, jwtData });
       // console.log(jwtData);
     } catch (error) {
       console.error(error.message);
@@ -60,6 +60,7 @@ router.post(
   "/login",
   [body("email").isEmail(), body("password").exists()],
   async (req, res) => {
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -69,25 +70,25 @@ router.post(
     try {
       let user = await User.findOne({ email });
       if (!user) {
-        return req
+        return res
           .status(400)
-          .json({ error: "No user with this email id exists." });
+          .json({ success, error: "No user with this email id exists." });
       }
 
       const checkPass = await bcrypt.compare(password, user.password);
       if (!checkPass) {
-        return req.status(400).json({ error: "Incorrect password" });
+        return req.status(400).json({success, error: "Incorrect password" });
       }
 
       const data = {
         user: { id: user.id },
       };
-
+      success = true;
       const jwtData = jwt.sign(data, secret);
-      res.json({ jwtData });
+      res.json({ success, jwtData });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal server error");
+      res.status(500).send("Internal server errorrrr");
     }
   }
 );
