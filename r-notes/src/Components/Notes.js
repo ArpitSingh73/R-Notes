@@ -76,7 +76,7 @@ const Notes = (props) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Modal title
+                Edit window
               </h5>
               <button
                 type="button"
@@ -91,7 +91,7 @@ const Notes = (props) => {
               ................................................................................................................................................
               <div className="mb-3">
                 <label htmlFor="title" className="form-label">
-                  Title
+                  Edit title
                 </label>
                 <input
                   type="text"
@@ -106,7 +106,7 @@ const Notes = (props) => {
               </div>
               <div className="mb-3">
                 <label htmlFor="edescription" className="form-label">
-                  Description
+                 Edit notes
                 </label>
                 <input
                   type="text"
@@ -121,7 +121,7 @@ const Notes = (props) => {
               </div>
               <div className="mb-3">
                 <label htmlFor="etag" className="form-label">
-                  Tag
+                  Edit tag
                 </label>
                 <input
                   type="text"
@@ -159,7 +159,7 @@ const Notes = (props) => {
 
       <div className="container">
         <div className="row my-3">
-          <h1    style={{  textAlign : "center",alignItems : "center", color:"#ffffff" }}>Your notes</h1>
+          <h1    style={{  textAlign : "center",alignItems : "center", color:"#ffffff" }}>{localStorage.getItem("name")}'s notes</h1>
           {notes.map((note) => {
             return (
               <Noteitem

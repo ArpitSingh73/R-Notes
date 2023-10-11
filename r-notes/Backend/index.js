@@ -7,7 +7,7 @@ const mongoConnect = require('./db');
 
 app.use(cors());
 app.use(mongoSanitize());
-app.use(helmet);
+app.use(helmet());
 app.use(express.json());
 mongoConnect();
 

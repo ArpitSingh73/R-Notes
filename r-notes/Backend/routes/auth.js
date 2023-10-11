@@ -69,6 +69,7 @@ router.post(
     const { email, password } = req.body;
     try {
       let user = await User.findOne({ email });
+      let name = user.name;
       if (!user) {
         return res
           .status(400)
@@ -83,9 +84,10 @@ router.post(
       const data = {
         user: { id: user.id },
       };
+      
       success = true;
       const jwtData = jwt.sign(data, secret);
-      res.json({ success, jwtData });
+      res.json({ success, jwtData, name });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal server errorrrr");

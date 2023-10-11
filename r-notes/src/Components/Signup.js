@@ -26,6 +26,8 @@ const Signup = (props) => {
     if (json.success) {
       // Save the auth token and redirect
       localStorage.setItem("token", json.jwtData);
+      localStorage.setItem("name", json.name);
+
       props.show("Welcome", "success");
 
       navigate("/");

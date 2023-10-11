@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+// import { useContext } from "react";
+// import noteContext from "../Context/noteContext";
 const Login = (props) => {
+  // const context = useContext(noteContext);
+  // let {user, setUser } = context;
+  // let json = "";
+
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
       headers: {
+        
+
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -20,22 +27,29 @@ const Login = (props) => {
     });
     const json = await response.json();
     console.log(json);
+   
     if (json.success) {
       // Save the auth token and redirect
       localStorage.setItem("token", json.jwtData);
+      localStorage.setItem("name", json.name);
       props.show("Welcome Back", "success");
+      
 
       navigate("/");
     } else {
-     
       props.show("Invalid user details", "danger");
     }
   };
 
+// const handleclick = () =>{
+//   setUser(user => user = json.name)
+//   console.log({user})
+// }
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
+  
   return (
     <div
       className="container"
@@ -79,6 +93,7 @@ const Login = (props) => {
         </div>
 
         <button
+        // onClick={handleclick }
           type="submit"
           className="btn btn-primary"
           style={{ boxShadow: "2px 2px 2px black ", border: "solid 1px black" , marginBottom:"30px"}}

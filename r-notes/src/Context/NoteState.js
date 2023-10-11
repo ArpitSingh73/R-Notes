@@ -7,10 +7,12 @@ const NoteState = (props) => {
 
   const noteInitial = [];
   const [notes, setNotes] = useState(noteInitial);
-
+  const [user, setUser] = useState("Arpit");
 // getallnotes
 
-const getNotes = async()=>{
+const getNotes = async(e)=>{
+  // e.preventDefault();
+  // e.stopPropagation();
   const response = await fetch("http://localhost:5000/api/notes/fetchnotes", {
     method: "GET",
     headers: {
@@ -28,6 +30,8 @@ const getNotes = async()=>{
   // Add a note
   const addNote = async(title, description, tag) => {
     // setNotes(notes.concat(noteInitial));
+    // e.preventDefault();
+    // e.stopPropagation();
 
     const response = await fetch(`http://localhost:5000/api/notes/addnote`,{
       method: "POST",
@@ -45,7 +49,8 @@ const getNotes = async()=>{
 
   // Delete a note
   const deleteNote = async(id) => {
-
+    // e.preventDefault();
+    // e.stopPropagation();
     
       const response = await fetch(`http://localhost:5000/api/notes/delete/${id}`, {
         method: "DELETE",
@@ -62,7 +67,8 @@ const getNotes = async()=>{
 
   // Edit a note
   const editNote = async (id, title, description, tag) => {
-
+    // e.preventDefault();
+    // e.stopPropagation();
     const response = await fetch(`http://localhost:5000/api/notes/update/${id}`, {
       method: "PUT",
       headers: {
@@ -89,7 +95,7 @@ setNotes(newnotes);
 
   return (
     <NoteContext.Provider
-      value={{ notes, addNote, getNotes , editNote, deleteNote }}
+      value={{user,setUser, notes, addNote, getNotes , editNote, deleteNote }}
     >
       {props.children}
     </NoteContext.Provider>

@@ -28,7 +28,7 @@ const AddNote = (props) => {
             color: "#ffffff",
           }}
         >
-          <h1>Make notes</h1>
+          <h1>Create notes</h1>
         </div>
         <div className="container my-3" style={{ width: "70%" }}>
           <form>
@@ -61,7 +61,7 @@ const AddNote = (props) => {
                 className="form-label"
                 style={{ color: "#ffffff" }}
               >
-                <b>Description</b>
+                <b>Notes</b>
               </label>
               <input
                 placeholder="Type descriptioin for your note..."
