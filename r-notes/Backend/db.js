@@ -1,10 +1,33 @@
-const mongoose = require('mongoose');
-const URI ='mongodb://localhost:27017/Trial3';
-// const URI ='mongodb+srv://arpitsingh73073:arpit710@cluster0.qmkjrvi.mongodb.net/?retryWrites=true&w=majority';
+// const mongoose = require('mongoose');
+// // const URI ='mongodb://localhost:27017/Trial3';
+// const URI ="mongodb+srv://arpitsingh73073:notes32145@cluster0.ftjjyay.mongodb.net/?retryWrites=true&w=majority";
 
 
 
-module.exports= connect = ()=>{
-    mongoose.connect(URI);
-}
+// module.exports= connect = ()=>{
+//     mongoose.connect(URI);
+// }
 
+
+
+const mongoose = require("mongoose");
+const colors = require("colors");
+
+const connect = async () => {
+  try {
+    const conn = await mongoose.connect(
+      "mongodb+srv://arpitsingh73073:notes32145@cluster0.ftjjyay.mongodb.net/?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
+
+    console.log(`MongoDB Connected: ${conn.connection.host}`.blue.underline);
+  } catch (error) {
+    console.error(`Error: ${error.message}`.red.bold);
+    process.exit(1); // Exit with a non-zero status code to indicate an error
+  }
+};
+
+module.exports = connect;
