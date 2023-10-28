@@ -12,11 +12,13 @@
 
 const mongoose = require("mongoose");
 const colors = require("colors");
+const dotenv = require("dotenv")
+dotenv.config()
 
 const connect = async () => {
   try {
     const conn = await mongoose.connect(
-      "mongodb+srv://arpitsingh73073:notes32145@cluster0.ftjjyay.mongodb.net/?retryWrites=true&w=majority",
+      process.env.PUBLIC_URL,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
