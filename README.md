@@ -1,6 +1,6 @@
 # R-Notes
 
-create your notea at :- https://notes-3hhf.onrender.com/
+create your notes at :- https://notes-3hhf.onrender.com/
 
 
 Hi there🖐, in this project I created notes taking web app. This is an end-to-end application which means one can create his/her account and can save and retrieve notes as per need. This app allowed me to learn & implement about :
